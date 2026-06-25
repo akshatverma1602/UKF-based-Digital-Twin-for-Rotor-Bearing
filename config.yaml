@@ -1,0 +1,32 @@
+# config.yaml -- scenario configuration for the MP-3 digital twin demo
+
+rotor:
+  m: 5.0            # disk mass                  [kg]
+  e: 1.0e-4         # mass eccentricity          [m]
+  Omega: 300.0      # running speed              [rad/s]  (~47.7 Hz, subcritical)
+  g: 9.81           # gravity                    [m/s^2]
+  gravity: true
+  kxx: 1.0e+6        # horizontal stiffness       [N/m]
+  kyy: 1.2e+6        # vertical stiffness         [N/m]
+  cxx: 250.0        # horizontal damping         [N.s/m]
+  cyy: 300.0        # vertical damping           [N.s/m]
+
+simulation:
+  dt: 5.0e-4        # step / sampling period     [s]  (2 kHz)
+  t_end: 8.0        # record length              [s]
+  meas_noise_std: 5.0e-6   # proximity-probe noise per axis [m] (5 um)
+  seed: 3
+
+fault:               # developing horizontal-stiffness loss (sigmoid)
+  d_max: 0.35        # 35 % stiffness loss at full damage
+  t_onset: 4.0       # inflection time           [s]
+  rate: 2.5          # transition steepness      [1/s]
+
+estimator:
+  estimate: [kxx, kyy]   # damping frozen at nominal (not observable here)
+  q_logk: 0.05           # log-stiffness random-walk density  [1/s]
+  q_logc: 0.01           # log-damping random-walk density    [1/s]
+
+detection:
+  fsi_threshold_pct: 3.0   # severity threshold for onset flag [%]
+  persist_s: 0.3           # must stay above threshold this long
