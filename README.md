@@ -1,4 +1,4 @@
-# MP-3 — Digital Twin of a Rotor–Bearing System
+# Digital Twin of a Rotor–Bearing System
 
 A physics-based **digital twin** of a rotating shaft on instrumented bearings.
 A model of the rotor runs alongside a simulated machine, and a recursive
